@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+/* @import '~bootstrap/dist/js/bootstrap.min.js'; */
+
+@import '~font-awesome/css/font-awesome.css';
+input.ng-touched.ng-invalid {
+    border-color: #dc3545;
+}
+
+input.ng-valid {
+    border-color: #28a745;
+}
+
+.invalid-feedback,
+.p-error {
+    color: red;
+    display: inline;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

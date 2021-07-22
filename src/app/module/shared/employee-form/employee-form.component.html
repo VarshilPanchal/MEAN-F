@@ -1,0 +1,71 @@
+<button (click)="valueChanged()"> Add Employee </button>
+
+<p-dialog [(visible)]="employeeDialog" [style]="{width: '450px'}" header="{{popupHeader}}" [modal]="true"
+    styleClass="p-fluid" (onHide)="hideDialog()">
+
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="row m-5 needs-validation">
+
+        <div class="col-md-12">
+            <div class="col-md-6 mt-1">
+                <label for="inputAddress" class="form-label">Employee Name* </label>
+                <input autofocus formControlName="name" type="text" class="form-control" maxlength="50"
+                    id="inputAddress" placeholder="Employee Name" required>
+                <div
+                    *ngIf="(isSubmitted && myForm.get('name')?.invalid) || (!myForm.get('name')?.valid && myForm.get('name')?.touched) ">
+                    <div *ngIf=" (myForm.get('name')?.errors?.required)">
+                        <span class="invalid-feedback">
+                            required
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-1">
+                <label for="inputAddress" class="form-label">Designation* </label>
+                <input maxlength="50" formControlName="designation" type="text" class="form-control" id="inputAddress"
+                    placeholder="Designation">
+                <div
+                    *ngIf="(isSubmitted && myForm.get('designation')?.invalid) || (!myForm.get('designation')?.valid && myForm.get('designation')?.touched) ">
+                    <div *ngIf=" (myForm.get('designation')?.errors?.required)">
+                        <span class="invalid-feedback">
+                            required
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-1">
+                <label for="inputAddress" class="form-label">Vertical* </label>
+                <input maxlength="50" formControlName="vertical" type="text" class="form-control" id="inputAddress"
+                    placeholder="Vertical">
+                <div
+                    *ngIf="(isSubmitted && myForm.get('vertical')?.invalid) || (!myForm.get('vertical')?.valid && myForm.get('vertical')?.touched) ">
+                    <div *ngIf=" (myForm.get('vertical')?.errors?.required)">
+                        <span class="invalid-feedback">
+                            required
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-1">
+                <label for="inputAddress" class="form-label">Salary* </label>
+                <input maxlength="50" formControlName="salary" type="number" class="form-control" id="inputAddress"
+                    placeholder="Salary">
+                <div
+                    *ngIf="(isSubmitted && myForm.get('salary')?.invalid) || (!myForm.get('salary')?.valid && myForm.get('salary')?.touched) ">
+                    <div *ngIf=" (myForm.get('salary')?.errors?.required)">
+                        <span class="invalid-feedback">
+                            required
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</p-dialog>
