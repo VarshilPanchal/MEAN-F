@@ -9,7 +9,7 @@
             <div class="col-md-6 mt-1">
                 <label for="inputAddress" class="form-label">Employee Name* </label>
                 <input autofocus formControlName="name" type="text" class="form-control" maxlength="50"
-                    id="inputAddress" placeholder="Employee Name" required>
+                    id="inputAddress" placeholder="Employee Name" required >
                 <div
                     *ngIf="(isSubmitted && myForm.get('name')?.invalid) || (!myForm.get('name')?.valid && myForm.get('name')?.touched) ">
                     <div *ngIf=" (myForm.get('name')?.errors?.required)">
