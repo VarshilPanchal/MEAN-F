@@ -49,6 +49,8 @@ import { FilterService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {DialogModule} from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+
 
 const materialModule = [
   CommonModule,
@@ -103,7 +105,8 @@ const materialModule = [
   DialogModule,
   // FilterService,
   // MatDialogModule,
-  HttpClientModule
+  HttpClientModule,
+  ButtonModule
 ];
 
 @NgModule({

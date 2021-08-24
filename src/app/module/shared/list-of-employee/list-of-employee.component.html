@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor="let employee of employees">
+            <div class="col-sm-6">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h3 class="card-title">{{employee.name}}</h3>
+                        <p class="card-text">{{employee.designation}}</p>
+                        <p class="card-text">{{employee.vertical}}</p>
+                        <p class="card-text">{{employee.salary | currency: 'USD'}} </p>
+
+                        <app-edit-employee-form (editDialogEmit)='editEmployee(employee)'>
+                        </app-edit-employee-form>
+
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

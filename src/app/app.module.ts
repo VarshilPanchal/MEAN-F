@@ -13,6 +13,9 @@ import { MatMaterialModule } from './mat-material/mat-material.module';
 import { CustomHttpService } from './services/custom-http-service/custom-http.service';
 import { NotificationService } from './services/notification-service/notification.service';
 import { LocalstorageService } from './services/localstorage-service/localstorage.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListOfEmployeeComponent } from './module/shared/list-of-employee/list-of-employee.component';
+import { EditEmployeeFormComponent } from './module/shared/edit-employee-form/edit-employee-form.component';
 
 @NgModule({
   declarations: [
@@ -20,10 +23,13 @@ import { LocalstorageService } from './services/localstorage-service/localstorag
     FooterComponent,
     HeaderComponent,
     EmployeeFormComponent,
-    HomeComponent
+    HomeComponent,
+    ListOfEmployeeComponent,
+    EditEmployeeFormComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MatMaterialModule,
     FormsModule,

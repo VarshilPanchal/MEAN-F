@@ -4,11 +4,11 @@ import { Employee } from 'src/app/model/employee';
 import { CustomValidator } from '../CustomValidator';
 
 @Component({
-  selector: 'app-employee-form',
-  templateUrl: './employee-form.component.html',
-  styleUrls: ['./employee-form.component.css']
+  selector: 'app-edit-employee-form',
+  templateUrl: './edit-employee-form.component.html',
+  styleUrls: ['./edit-employee-form.component.css']
 })
-export class EmployeeFormComponent implements OnInit {
+export class EditEmployeeFormComponent implements OnInit {
 
   myForm!: FormGroup;
   isSubmitted = false;
@@ -67,7 +67,6 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   editEmployee(entity?: any): void {
-
     if (entity) {
       this.editDialogEmit.emit('Edit Dialog Opened');
       entity = { ...entity };
