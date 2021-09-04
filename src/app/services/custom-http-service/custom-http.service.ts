@@ -172,6 +172,17 @@ export class CustomHttpService {
     return requestOptions;
   }
 
+  getRequestOptionsOfNode() {
+    const headers = new HttpHeaders()
+      // .set('Content-Type', 'application/json; charset=UTF-8')
+      // .set('Access-Control-Allow-Origin', '*')
+      .set('Accept', '*/*');
+    const requestOptions = {
+      headers: headers
+    };
+    return requestOptions;
+  }
+
 
   // getRequestOptionsBlob() {
   //   const headers = new HttpHeaders()
@@ -273,7 +284,22 @@ export class CustomHttpService {
     // });
   }
 
-  putWithoutAuthorization(url: string, body: string): Observable<any> {
+  getNodeJsWithoutAuth(url: string): Observable<any> {
+    const requestOptions = this.getRequestOptionsOfNode();
+
+    return this.httpClient.get(url, requestOptions)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error: any) => {
+          this.errorService.showError('Something went wrong.Please retry after sometime or contact Administrator.');
+          return Observable.throw(error);
+        })
+      )
+  }
+
+  putWithoutAuthorization(url: string, body: any): Observable<any> {
     const requestOptions = this.getRequestOptionsWithoutAuthorization();
 
     return this.httpClient.put(url, body, requestOptions)
@@ -294,7 +320,38 @@ export class CustomHttpService {
     //   return Observable.throw(error);
     // });
   }
-  postWithoutAuthorization(url: string, body: string): Observable<any> {
+
+  putNodeJssWithoutAuth(url: string, body: any): Observable<any> {
+    const requestOptions = this.getRequestOptionsOfNode();
+
+    return this.httpClient.put(url, body, requestOptions)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error: any) => {
+          this.errorService.showError('Something went wrong.Please retry after sometime or contact Administrator.');
+          return Observable.throw(error);
+        })
+      )
+  }
+
+  deleteNodeJssWithoutAuth(url: string): Observable<any> {
+    const requestOptions = this.getRequestOptionsOfNode();
+
+    return this.httpClient.delete(url, requestOptions)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error: any) => {
+          this.errorService.showError('Something went wrong.Please retry after sometime or contact Administrator.');
+          return Observable.throw(error);
+        })
+      )
+  }
+
+  postWithoutAuthorization(url: string, body: any): Observable<any> {
     const requestOptions = this.getRequestOptionsWithoutAuthorization();
 
     return this.httpClient.post(url, body, requestOptions)
@@ -314,6 +371,22 @@ export class CustomHttpService {
     //   this.errorService.showError('Something went wrong.Please retry after sometime or contact Administrator.');
     //   return Observable.throw(error);
     // });
+  }
+
+
+  postNodeJssWithoutAuth(url: string, body: any): Observable<any> {
+    const requestOptions = this.getRequestOptionsOfNode();
+
+    return this.httpClient.post(url, body, requestOptions)
+      .pipe(
+        map((res) => {
+          return res;
+        }),
+        catchError((error: any) => {
+          this.errorService.showError('Something went wrong.Please retry after sometime or contact Administrator.');
+          return Observable.throw(error);
+        })
+      )
   }
 
 

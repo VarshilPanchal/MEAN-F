@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Employee } from 'src/app/model/employee';
+import { EmployeeServicesService } from 'src/app/services/employee-services/employee-services.service';
 import { CustomValidator } from '../CustomValidator';
 
 @Component({
@@ -18,12 +19,10 @@ export class EmployeeFormComponent implements OnInit {
 
   @Output() dialogEmit = new EventEmitter();
   @Output() editDialogEmit = new EventEmitter();
-  // @Input() ;
-
-
 
   constructor(
     private _formBuilder: FormBuilder,
+    private employeeService: EmployeeServicesService,
   ) { }
 
   ngOnInit(): void {
@@ -48,16 +47,26 @@ export class EmployeeFormComponent implements OnInit {
 
   public onSubmit(): any {
     this.isSubmitted = true;
-
     if (this.myForm.invalid) {
       CustomValidator.markFormGroupTouched(this.myForm);
       this.isSubmitted = false;
       throw new Error('Form is invalid');
     } else {
+      this.employeeService.addEmployees(this.myForm.value).subscribe(
+        (data) => {
+          console.log(data);
+          this.hideDialog();
+          this.dialogEmit.emit(false);
+        },
+        (error) => {
+          console.log(error);
+          this.hideDialog();
+          this.dialogEmit.emit(false);
+        }
+      )
       console.log("Form is", this.myForm.valid)
       console.log("Form values:", this.myForm.value)
     }
-
   }
 
   hideDialog(): any {
@@ -67,7 +76,6 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   editEmployee(entity?: any): void {
-
     if (entity) {
       this.editDialogEmit.emit('Edit Dialog Opened');
       entity = { ...entity };
@@ -82,14 +90,12 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   valueChanged(entity?: Employee) {
-
-    if (entity) {
-      this.editEmployee(entity)
-    } else {
-      this.employeeDialog = true;
-      this.dialogEmit.emit('Dialog Opened');
-    }
+    // if (entity) {
+    //   this.editEmployee(entity)
+    // } else {
+    this.employeeDialog = true;
+    this.dialogEmit.emit(true);
+    // }
   }
-
 
 }

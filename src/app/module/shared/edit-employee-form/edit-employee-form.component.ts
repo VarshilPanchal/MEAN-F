@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Employee } from 'src/app/model/employee';
+import { EmployeeServicesService } from 'src/app/services/employee-services/employee-services.service';
 import { CustomValidator } from '../CustomValidator';
 
 @Component({
@@ -17,17 +18,24 @@ export class EditEmployeeFormComponent implements OnInit {
   employeeDto!: Employee;
 
   @Output() dialogEmit = new EventEmitter();
-  @Output() editDialogEmit = new EventEmitter();
-  // @Input() ;
-
-
+  // @Output() editDialogEmit = new EventEmitter();
 
   constructor(
     private _formBuilder: FormBuilder,
+    private employeeServices: EmployeeServicesService
   ) { }
 
   ngOnInit(): void {
     this.initializeForm();
+    this.employeeServices.editDialogEmit.subscribe(
+      (emitedValue) => {
+        console.log(emitedValue);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+
   }
 
   public initializeForm() {
@@ -68,7 +76,6 @@ export class EditEmployeeFormComponent implements OnInit {
 
   editEmployee(entity?: any): void {
     if (entity) {
-      this.editDialogEmit.emit('Edit Dialog Opened');
       entity = { ...entity };
       this.employeeDto = entity;
       this.popupHeader = 'Edit Employee';
@@ -79,16 +86,5 @@ export class EditEmployeeFormComponent implements OnInit {
       console.log('Data not editable')
     }
   }
-
-  valueChanged(entity?: Employee) {
-
-    if (entity) {
-      this.editEmployee(entity)
-    } else {
-      this.employeeDialog = true;
-      this.dialogEmit.emit('Dialog Opened');
-    }
-  }
-
 
 }

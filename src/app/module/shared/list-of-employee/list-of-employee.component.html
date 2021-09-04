@@ -1,17 +1,21 @@
+<app-employee-form (dialogEmit)='displayCounter($event)'></app-employee-form>
+
 <div class="container">
+    {{employees.length}}
+    <br>
     <div class="row">
         <ng-container *ngFor="let employee of employees">
-            <div class="col-sm-6">
+            <div class="col-sm-3 mb-3">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h3 class="card-title">{{employee.name}}</h3>
-                        <p class="card-text">{{employee.designation}}</p>
-                        <p class="card-text">{{employee.vertical}}</p>
-                        <p class="card-text">{{employee.salary | currency: 'USD'}} </p>
-
-                        <app-edit-employee-form (editDialogEmit)='editEmployee(employee)'>
-                        </app-edit-employee-form>
-
+                        <p class="card-text">Designation:{{employee.designation}}</p>
+                        <p class="card-text">Vertical{{employee.vertical}}</p>
+                        <p class="card-text">salary:{{employee.salary | currency: 'USD'}} </p>
+                        <!-- <app-edit-employee-form (editDialogEmit)='editEmployee(employee)'>
+                        </app-edit-employee-form> -->
+                        <button type="submit" class="btn btn-primary" (click)="editEmployee(employee)"> Edit</button>
+                        <button type="button" class="btn btn-danger" (click)="deleteEmployee(employee)"> Delete</button>
                     </div>
                 </div>
             </div>
